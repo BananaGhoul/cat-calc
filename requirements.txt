@@ -1,0 +1,6 @@
+flask
+gunicorn
+flask-sqlalchemy
+requests
+geopy
+os

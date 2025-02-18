@@ -1,0 +1,108 @@
+/* Algemene stijl */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Zorg ervoor dat de tekst en checkbox netjes naast elkaar staan */
+.checkbox-container {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    gap: 8px;
+    width: fit-content;
+    margin: auto;
+}
+
+.checkbox-container label {
+    order: -1;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    position: relative;
+    top: 9px;
+}
+
+/* Container voor het formulier */
+.container {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    padding: 20px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Custom fade-in animatie */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Fade in keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Koptekst */
+h1 {
+    text-align: center;
+    color: #444;
+}
+
+/* Labels en invoervelden */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Invoer elementen */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+}
+
+/* Knop stijl */
+button {
+    width: 100%;
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #218838;
+    transform: scale(1.02);
+}
+
+/* Responsief: Zorg ervoor dat alles netjes blijft op mobiele schermen */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+}
+
+/* Globale box-sizing reset */
+* {
+    box-sizing: border-box;
+}

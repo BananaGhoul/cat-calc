@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Berekening Resultaat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Zorg dat de kaart een hoogte krijgt */
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Berekening Resultaat</h1>
+        <p><strong>Catering kosten:</strong> {{ result.catering_cost }}</p>
+        <p><strong>Afstand (enkele reis):</strong> {{ result.distance_km }}</p>
+        <p><strong>Bezorgkosten:</strong> {{ result.route_cost }}</p>
+        <p><strong>Totale kosten:</strong> {{ result.total_cost }}</p>
+        <br>
+        <a href="{{ url_for('index') }}">
+            <button>Nieuwe berekening</button>
+        </a>
+
+        <!-- Kaart container -->
+        <div id="map"></div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Zet de route geometrie om naar een JavaScript object -->
+    <script>
+        // Zorg ervoor dat de route_geometry veilig naar JSON geconverteerd wordt
+        var routeGeoJSON = {{ result.route_geometry | tojson }};
+
+        // Initialiseer de kaart (de beginpositie is tijdelijk, we passen dit later aan)
+        var map = L.map('map').setView([0, 0], 13);
+
+        // Voeg een OpenStreetMap tile layer toe
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Als er route gegevens aanwezig zijn, voeg deze dan toe aan de kaart
+        if (routeGeoJSON) {
+            var geojsonLayer = L.geoJSON(routeGeoJSON).addTo(map);
+            // Pas het zicht van de kaart aan zodat de route volledig zichtbaar is
+            map.fitBounds(geojsonLayer.getBounds());
+        }
+    </script>
+</body>
+</html>
